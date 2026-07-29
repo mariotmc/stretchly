@@ -133,6 +133,33 @@ body[dir=rtl] .schedule > :nth-child(17) {
   text-align: left
 }
 
+.schedule > .schedule-heading {
+  grid-column: 1/2;
+  padding: 0 16px;
+  text-align: right;
+}
+
+body[dir=rtl] .schedule > .schedule-heading {
+  text-align: left;
+}
+
+.work-schedule-days {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(2, minmax(100px, 1fr));
+}
+
+.work-schedule-days label,
+.work-schedule-times {
+  align-items: center;
+  display: flex;
+  gap: 6px;
+}
+
+.work-schedule-times input {
+  margin-right: 10px;
+}
+
 .theme {
   display: grid;
   font-size: 13px;

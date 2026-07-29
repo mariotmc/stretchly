@@ -765,10 +765,8 @@ function startMicrobreak () {
 
   const breakDuration = settings.get('microbreakDuration')
   const strictMode = settings.get('microbreakStrictMode')
-  const postponesLimit = settings.get('microbreakPostponesLimit')
   const postponableDurationPercent = settings.get('microbreakPostponableDurationPercent')
-  const postponable = settings.get('microbreakPostpone') &&
-    breakPlanner.postponesNumber < postponesLimit && postponesLimit > 0
+  const postponable = settings.get('microbreakPostpone')
   const showBreaksAsRegularWindows = settings.get('showBreaksAsRegularWindows')
 
   const modalPath = 'file://' + join(__dirname, '/microbreak.html')
@@ -933,10 +931,8 @@ function startBreak () {
 
   const breakDuration = settings.get('breakDuration')
   const strictMode = settings.get('breakStrictMode')
-  const postponesLimit = settings.get('breakPostponesLimit')
   const postponableDurationPercent = settings.get('breakPostponableDurationPercent')
-  const postponable = settings.get('breakPostpone') &&
-    breakPlanner.postponesNumber < postponesLimit && postponesLimit > 0
+  const postponable = settings.get('breakPostpone')
   const showBreaksAsRegularWindows = settings.get('showBreaksAsRegularWindows')
 
   const modalPath = 'file://' + join(__dirname, '/break.html')
@@ -1637,6 +1633,10 @@ ipcMain.on('save-setting', function (event, key, value) {
   }
 
   settings.set(key, value)
+
+  if (key.startsWith('workSchedule')) {
+    breakPlanner.reset()
+  }
 
   updateTray()
 })

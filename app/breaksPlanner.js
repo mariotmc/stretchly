@@ -4,6 +4,7 @@ import NaturalBreaksManager from './utils/naturalBreaksManager.js'
 import DndManager from './utils/dndManager.js'
 import AppExclusionsManager from './utils/appExclusionsManager.js'
 import log from 'electron-log/main.js'
+import { workScheduleState } from './utils/workSchedule.js'
 
 class BreaksPlanner extends EventEmitter {
   constructor (settings) {
@@ -122,34 +123,34 @@ class BreaksPlanner extends EventEmitter {
     const microbreakNotificationInterval = this.settings.get('microbreakNotificationInterval')
     if (!shouldBreak && shouldMicrobreak) {
       if (microbreakNotification) {
-        this.scheduler = new Scheduler(() => this.emit('startMicrobreakNotification'), interval - microbreakNotificationInterval, 'startMicrobreakNotification')
+        this._plan(() => this.emit('startMicrobreakNotification'), interval - microbreakNotificationInterval, 'startMicrobreakNotification', interval)
       } else {
-        this.scheduler = new Scheduler(() => this.emit('startMicrobreak'), interval, 'startMicrobreak')
+        this._plan(() => this.emit('startMicrobreak'), interval, 'startMicrobreak')
       }
     } else if (shouldBreak && !shouldMicrobreak) {
+      const breakDelay = interval * (this.settings.get('breakInterval') + 1)
       if (breakNotification) {
-        this.scheduler = new Scheduler(() => this.emit('startBreakNotification'), interval * (this.settings.get('breakInterval') + 1) - breakNotificationInterval, 'startBreakNotification')
+        this._plan(() => this.emit('startBreakNotification'), breakDelay - breakNotificationInterval, 'startBreakNotification', breakDelay)
       } else {
-        this.scheduler = new Scheduler(() => this.emit('startBreak'), interval * (this.settings.get('breakInterval') + 1), 'startBreak')
+        this._plan(() => this.emit('startBreak'), breakDelay, 'startBreak')
       }
     } else if (shouldBreak && shouldMicrobreak) {
       this.breakNumber = this.breakNumber + 1
       const breakInterval = this.settings.get('breakInterval') + 1
       if (this.breakNumber % breakInterval === 0) {
         if (breakNotification) {
-          this.scheduler = new Scheduler(() => this.emit('startBreakNotification'), interval - breakNotificationInterval, 'startBreakNotification')
+          this._plan(() => this.emit('startBreakNotification'), interval - breakNotificationInterval, 'startBreakNotification', interval)
         } else {
-          this.scheduler = new Scheduler(() => this.emit('startBreak'), interval, 'startBreak')
+          this._plan(() => this.emit('startBreak'), interval, 'startBreak')
         }
       } else {
         if (microbreakNotification) {
-          this.scheduler = new Scheduler(() => this.emit('startMicrobreakNotification'), interval - microbreakNotificationInterval, 'startMicrobreakNotification')
+          this._plan(() => this.emit('startMicrobreakNotification'), interval - microbreakNotificationInterval, 'startMicrobreakNotification', interval)
         } else {
-          this.scheduler = new Scheduler(() => this.emit('startMicrobreak'), interval, 'startMicrobreak')
+          this._plan(() => this.emit('startMicrobreak'), interval, 'startMicrobreak')
         }
       }
     }
-    this.scheduler.plan()
   }
 
   nextBreakAfterNotification () {
@@ -157,8 +158,7 @@ class BreaksPlanner extends EventEmitter {
     const scheduledBreakType = this._scheduledBreakType
     const breakNotificationInterval = this.settings.get(`${scheduledBreakType}NotificationInterval`)
     const eventName = `start${scheduledBreakType.charAt(0).toUpperCase() + scheduledBreakType.slice(1)}`
-    this.scheduler = new Scheduler(() => this.emit(eventName), breakNotificationInterval, eventName)
-    this.scheduler.plan()
+    this._plan(() => this.emit(eventName), breakNotificationInterval, eventName)
   }
 
   postponeCurrentBreak () {
@@ -174,9 +174,29 @@ class BreaksPlanner extends EventEmitter {
       postponeTime = this.settings.get(`${scheduledBreakType}PostponeTime`)
       eventName = `start${scheduledBreakType.charAt(0).toUpperCase() + scheduledBreakType.slice(1)}`
     }
-    this.scheduler = new Scheduler(() => this.emit(eventName), postponeTime, eventName)
-    this.scheduler.plan()
+    this._plan(
+      () => this.emit(eventName),
+      postponeTime,
+      eventName,
+      this.settings.get(`${scheduledBreakType}PostponeTime`)
+    )
     this.emit('updateToolTip')
+  }
+
+  _plan (func, delay, reference, activeDelay = delay) {
+    const schedule = workScheduleState(
+      this.settings.get('workScheduleEnabled'),
+      this.settings.get('workScheduleDays'),
+      this.settings.get('workScheduleStart'),
+      this.settings.get('workScheduleEnd')
+    )
+
+    if (schedule.active && activeDelay < schedule.millisecondsUntilInactive) {
+      this.scheduler = new Scheduler(func, delay, reference)
+    } else {
+      this.scheduler = new Scheduler(() => this.nextBreak(), schedule.millisecondsUntilActive, 'resumeWorkSchedule')
+    }
+    this.scheduler.plan()
   }
 
   skipToMicrobreak (delay = 100) {

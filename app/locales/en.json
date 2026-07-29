@@ -69,7 +69,21 @@
       "strictModeInfo": "Strict mode prevents you from skipping either Mini breaks or Long breaks and is designed to help discipline.",
       "enableStrictMini": "Enable Strict mode for Mini breaks",
       "enableStrictLong": "Enable Strict mode for Long breaks",
-      "cantDisableBoth": "It is not possible to disable both types of breaks"
+      "cantDisableBoth": "It is not possible to disable both types of breaks",
+      "workHours": "Work hours:",
+      "workHoursInfo": "Break timers run only during the selected days and local times.",
+      "enableWorkSchedule": "Limit breaks to my work schedule",
+      "from": "From:",
+      "to": "To:",
+      "weekdays": {
+        "monday": "Monday",
+        "tuesday": "Tuesday",
+        "wednesday": "Wednesday",
+        "thursday": "Thursday",
+        "friday": "Friday",
+        "saturday": "Saturday",
+        "sunday": "Sunday"
+      }
     },
     "theme": {
       "appearance": "Appearance:",
@@ -135,7 +149,7 @@
     "customIdeasInfo": "Allows you to use custom break ideas by editing configuration file. (For advanced users.)",
     "useIdeasFromSettings": "Use break ideas from configuration file",
     "breakPostpone": "Postponement of breaks:",
-    "breakPostponeInfo": "If enabled in main Preferences, you can postpone breaks. Following settings allow you to specify when, for how long and how many times you can postpone a break.",
+    "breakPostponeInfo": "If enabled in main Preferences, you can postpone breaks. The following settings control when and for how long a break is postponed.",
     "miniBreaks": "Mini breaks:",
     "postponableFor": "Postponable for:",
     "postponeFor": "Postpone for:",

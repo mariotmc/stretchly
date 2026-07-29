@@ -178,7 +178,7 @@ window.onload = async (e) => {
     }
   })
 
-  document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+  document.querySelectorAll('input[type="checkbox"]:not([data-workday])').forEach(checkbox => {
     const isNegative = checkbox.classList.contains('negative')
     checkbox.checked = isNegative ? !settings[checkbox.value] : settings[checkbox.value]
     if (!eventsAttached) {
@@ -187,6 +187,25 @@ window.onload = async (e) => {
           isNegative ? !checkbox.checked : checkbox.checked)
     }
   })
+
+  document.querySelectorAll('[data-workday]').forEach(checkbox => {
+    checkbox.checked = settings.workScheduleDays.includes(Number(checkbox.dataset.workday))
+    if (!eventsAttached) {
+      checkbox.onchange = () => {
+        const days = [...document.querySelectorAll('[data-workday]:checked')]
+          .map(element => Number(element.dataset.workday))
+        window.settings.saveSettings('workScheduleDays', days)
+      }
+    }
+  })
+
+  document.querySelector('#workScheduleStart').value = settings.workScheduleStart
+  document.querySelector('#workScheduleEnd').value = settings.workScheduleEnd
+  if (!eventsAttached) {
+    document.querySelectorAll('.work-schedule-times input').forEach(input => {
+      input.onchange = () => window.settings.saveSettings(input.id, input.value)
+    })
+  }
 
   document.querySelectorAll('input[type="radio"]').forEach(radio => {
     let value

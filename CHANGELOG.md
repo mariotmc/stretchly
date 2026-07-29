@@ -5,6 +5,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+- weekly work schedule settings to limit break timers to selected days and local times
+
+### Changed
+- breaks can now be postponed without a per-break limit
+
 ### Fixed
 - tray icon system theme now follows the Windows mode used by the taskbar instead of the default app mode
 - Do Not Disturb no longer stays active when Windows Focus Assist is unsupported

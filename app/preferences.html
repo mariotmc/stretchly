@@ -276,6 +276,34 @@
       <input type="checkbox" value="breakStrictMode" id="enableStrictLong">
       <label data-i18next="preferences.schedule.enableStrictLong" for="enableStrictLong"></label>
     </div>
+    <div>
+      <hr />
+    </div>
+    <div class="schedule-heading">
+      <span data-i18next="preferences.schedule.workHours"></span>
+    </div>
+    <div>
+      <p data-i18next="preferences.schedule.workHoursInfo"></p>
+    </div>
+    <div>
+      <input type="checkbox" value="workScheduleEnabled" id="enableWorkSchedule">
+      <label data-i18next="preferences.schedule.enableWorkSchedule" for="enableWorkSchedule"></label>
+    </div>
+    <div class="work-schedule-days">
+      <label><input type="checkbox" data-workday="1"><span data-i18next="preferences.schedule.weekdays.monday"></span></label>
+      <label><input type="checkbox" data-workday="2"><span data-i18next="preferences.schedule.weekdays.tuesday"></span></label>
+      <label><input type="checkbox" data-workday="3"><span data-i18next="preferences.schedule.weekdays.wednesday"></span></label>
+      <label><input type="checkbox" data-workday="4"><span data-i18next="preferences.schedule.weekdays.thursday"></span></label>
+      <label><input type="checkbox" data-workday="5"><span data-i18next="preferences.schedule.weekdays.friday"></span></label>
+      <label><input type="checkbox" data-workday="6"><span data-i18next="preferences.schedule.weekdays.saturday"></span></label>
+      <label><input type="checkbox" data-workday="0"><span data-i18next="preferences.schedule.weekdays.sunday"></span></label>
+    </div>
+    <div class="work-schedule-times">
+      <label data-i18next="preferences.schedule.from" for="workScheduleStart"></label>
+      <input type="time" id="workScheduleStart">
+      <label data-i18next="preferences.schedule.to" for="workScheduleEnd"></label>
+      <input type="time" id="workScheduleEnd">
+    </div>
   </div>
   <div class="theme hidden">
     <div>

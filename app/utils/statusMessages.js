@@ -43,6 +43,13 @@ class StatusMessages {
       return message
     }
 
+    if (this.reference === 'resumeWorkSchedule') {
+      message += this.i18next.t('statusMessages.outsideWorkSchedule') + ' - ' +
+        this.i18next.t('statusMessages.resuming') + ' ' +
+        formatTimeIn(this.timeLeft, this.settings.get('language'), this.i18next, this.humanizeDuration)
+      return message
+    }
+
     const breakInterval = this.settings.get('breakInterval') + 1
     const breakNumber = this.breakNumber % breakInterval
 
