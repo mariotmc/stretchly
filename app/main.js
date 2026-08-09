@@ -570,7 +570,8 @@ function trayIconPath () {
       breakPlanner.isPaused ||
       breakPlanner.dndManager.isOnDnd ||
       breakPlanner.naturalBreaksManager.isSchedulerCleared ||
-      breakPlanner.appExclusionsManager.isSchedulerCleared,
+      breakPlanner.appExclusionsManager.isSchedulerCleared ||
+      breakPlanner.scheduler.reference === 'resumeActiveHours',
     monochrome: settings.get('useMonochromeTrayIcon'),
     inverted: useDarkColors,
     darkMode: useDarkColors,
@@ -1634,7 +1635,7 @@ ipcMain.on('save-setting', function (event, key, value) {
 
   settings.set(key, value)
 
-  if (key.startsWith('workSchedule')) {
+  if (key.startsWith('activeHours')) {
     breakPlanner.reset()
   }
 

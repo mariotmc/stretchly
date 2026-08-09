@@ -280,29 +280,29 @@
       <hr />
     </div>
     <div class="schedule-heading">
-      <span data-i18next="preferences.schedule.workHours"></span>
+      <span data-i18next="preferences.schedule.activeHours"></span>
     </div>
     <div>
-      <p data-i18next="preferences.schedule.workHoursInfo"></p>
+      <p data-i18next="preferences.schedule.activeHoursInfo"></p>
     </div>
     <div>
-      <input type="checkbox" value="workScheduleEnabled" id="enableWorkSchedule">
-      <label data-i18next="preferences.schedule.enableWorkSchedule" for="enableWorkSchedule"></label>
+      <input type="checkbox" value="activeHoursEnabled" id="enableActiveHours">
+      <label data-i18next="preferences.schedule.enableActiveHours" for="enableActiveHours"></label>
     </div>
-    <div class="work-schedule-days">
-      <label><input type="checkbox" data-workday="1"><span data-i18next="preferences.schedule.weekdays.monday"></span></label>
-      <label><input type="checkbox" data-workday="2"><span data-i18next="preferences.schedule.weekdays.tuesday"></span></label>
-      <label><input type="checkbox" data-workday="3"><span data-i18next="preferences.schedule.weekdays.wednesday"></span></label>
-      <label><input type="checkbox" data-workday="4"><span data-i18next="preferences.schedule.weekdays.thursday"></span></label>
-      <label><input type="checkbox" data-workday="5"><span data-i18next="preferences.schedule.weekdays.friday"></span></label>
-      <label><input type="checkbox" data-workday="6"><span data-i18next="preferences.schedule.weekdays.saturday"></span></label>
-      <label><input type="checkbox" data-workday="0"><span data-i18next="preferences.schedule.weekdays.sunday"></span></label>
+    <div class="active-hours-days">
+      <div><input type="checkbox" data-day="1" id="activeDay1"><label data-i18next="preferences.schedule.weekdays.monday" for="activeDay1"></label></div>
+      <div><input type="checkbox" data-day="2" id="activeDay2"><label data-i18next="preferences.schedule.weekdays.tuesday" for="activeDay2"></label></div>
+      <div><input type="checkbox" data-day="3" id="activeDay3"><label data-i18next="preferences.schedule.weekdays.wednesday" for="activeDay3"></label></div>
+      <div><input type="checkbox" data-day="4" id="activeDay4"><label data-i18next="preferences.schedule.weekdays.thursday" for="activeDay4"></label></div>
+      <div><input type="checkbox" data-day="5" id="activeDay5"><label data-i18next="preferences.schedule.weekdays.friday" for="activeDay5"></label></div>
+      <div><input type="checkbox" data-day="6" id="activeDay6"><label data-i18next="preferences.schedule.weekdays.saturday" for="activeDay6"></label></div>
+      <div><input type="checkbox" data-day="0" id="activeDay0"><label data-i18next="preferences.schedule.weekdays.sunday" for="activeDay0"></label></div>
     </div>
-    <div class="work-schedule-times">
-      <label data-i18next="preferences.schedule.from" for="workScheduleStart"></label>
-      <input type="time" id="workScheduleStart">
-      <label data-i18next="preferences.schedule.to" for="workScheduleEnd"></label>
-      <input type="time" id="workScheduleEnd">
+    <div class="active-hours-times">
+      <label data-i18next="preferences.schedule.from" for="activeHoursStart"></label>
+      <input type="time" id="activeHoursStart">
+      <label data-i18next="preferences.schedule.to" for="activeHoursEnd"></label>
+      <input type="time" id="activeHoursEnd">
     </div>
   </div>
   <div class="theme hidden">

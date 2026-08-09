@@ -43,8 +43,8 @@ class StatusMessages {
       return message
     }
 
-    if (this.reference === 'resumeWorkSchedule') {
-      message += this.i18next.t('statusMessages.outsideWorkSchedule') + ' - ' +
+    if (this.reference === 'resumeActiveHours') {
+      message += this.i18next.t('statusMessages.outsideActiveHours') + ' - ' +
         this.i18next.t('statusMessages.resuming') + ' ' +
         formatTimeIn(this.timeLeft, this.settings.get('language'), this.i18next, this.humanizeDuration)
       return message

@@ -178,7 +178,7 @@ window.onload = async (e) => {
     }
   })
 
-  document.querySelectorAll('input[type="checkbox"]:not([data-workday])').forEach(checkbox => {
+  document.querySelectorAll('input[type="checkbox"]:not([data-day])').forEach(checkbox => {
     const isNegative = checkbox.classList.contains('negative')
     checkbox.checked = isNegative ? !settings[checkbox.value] : settings[checkbox.value]
     if (!eventsAttached) {
@@ -188,21 +188,21 @@ window.onload = async (e) => {
     }
   })
 
-  document.querySelectorAll('[data-workday]').forEach(checkbox => {
-    checkbox.checked = settings.workScheduleDays.includes(Number(checkbox.dataset.workday))
+  document.querySelectorAll('[data-day]').forEach(checkbox => {
+    checkbox.checked = settings.activeHoursDays.includes(Number(checkbox.dataset.day))
     if (!eventsAttached) {
       checkbox.onchange = () => {
-        const days = [...document.querySelectorAll('[data-workday]:checked')]
-          .map(element => Number(element.dataset.workday))
-        window.settings.saveSettings('workScheduleDays', days)
+        const days = [...document.querySelectorAll('[data-day]:checked')]
+          .map(element => Number(element.dataset.day))
+        window.settings.saveSettings('activeHoursDays', days)
       }
     }
   })
 
-  document.querySelector('#workScheduleStart').value = settings.workScheduleStart
-  document.querySelector('#workScheduleEnd').value = settings.workScheduleEnd
+  document.querySelector('#activeHoursStart').value = settings.activeHoursStart
+  document.querySelector('#activeHoursEnd').value = settings.activeHoursEnd
   if (!eventsAttached) {
-    document.querySelectorAll('.work-schedule-times input').forEach(input => {
+    document.querySelectorAll('.active-hours-times input').forEach(input => {
       input.onchange = () => window.settings.saveSettings(input.id, input.value)
     })
   }

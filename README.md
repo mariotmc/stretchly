@@ -136,7 +136,7 @@ When you run *Stretchly* for the first time, you are presented with a Welcome wi
 
 By default, there is a 20 second Mini break every 10 minutes and a 5 minute Long break every 30 minutes (after 2 Mini breaks).
 
-The Schedule preferences can limit break timers to selected days and local work hours. Timers restart with a fresh interval when the next work window begins.
+The Schedule preferences can limit break timers to selected days and local times, called active hours. Timers restart with a fresh interval when the next active period begins.
 
 <img src="longbreak.png" height="340">
 

@@ -4,7 +4,7 @@ import NaturalBreaksManager from './utils/naturalBreaksManager.js'
 import DndManager from './utils/dndManager.js'
 import AppExclusionsManager from './utils/appExclusionsManager.js'
 import log from 'electron-log/main.js'
-import { workScheduleState } from './utils/workSchedule.js'
+import { activeHoursState } from './utils/activeHours.js'
 
 class BreaksPlanner extends EventEmitter {
   constructor (settings) {
@@ -184,17 +184,17 @@ class BreaksPlanner extends EventEmitter {
   }
 
   _plan (func, delay, reference, activeDelay = delay) {
-    const schedule = workScheduleState(
-      this.settings.get('workScheduleEnabled'),
-      this.settings.get('workScheduleDays'),
-      this.settings.get('workScheduleStart'),
-      this.settings.get('workScheduleEnd')
+    const schedule = activeHoursState(
+      this.settings.get('activeHoursEnabled'),
+      this.settings.get('activeHoursDays'),
+      this.settings.get('activeHoursStart'),
+      this.settings.get('activeHoursEnd')
     )
 
     if (schedule.active && activeDelay < schedule.millisecondsUntilInactive) {
       this.scheduler = new Scheduler(func, delay, reference)
     } else {
-      this.scheduler = new Scheduler(() => this.nextBreak(), schedule.millisecondsUntilActive, 'resumeWorkSchedule')
+      this.scheduler = new Scheduler(() => this.nextBreak(), schedule.millisecondsUntilActive, 'resumeActiveHours')
     }
     this.scheduler.plan()
   }

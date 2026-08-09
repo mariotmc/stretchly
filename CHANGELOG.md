@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
-- weekly work schedule settings to limit break timers to selected days and local times
+- active hours settings to limit break timers to selected days and local times
 
 ### Changed
 - breaks can now be postponed without a per-break limit
