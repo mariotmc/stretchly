@@ -797,7 +797,7 @@ function startMicrobreak () {
         }
         if (canPostpone(postponable, passedPercent, postponableDurationPercent)) {
           postponeMicrobreak()
-        } else if (canSkip(strictMode, postponable, passedPercent, postponableDurationPercent)) {
+        } else if (canSkip(strictMode)) {
           increaseDanger(1)
           finishMicrobreak(false)
         }
@@ -964,7 +964,7 @@ function startBreak () {
         }
         if (canPostpone(postponable, passedPercent, postponableDurationPercent)) {
           postponeBreak()
-        } else if (canSkip(strictMode, postponable, passedPercent, postponableDurationPercent)) {
+        } else if (canSkip(strictMode)) {
           increaseDanger(2)
           finishBreak(false)
         }

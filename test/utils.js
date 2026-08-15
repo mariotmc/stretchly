@@ -100,30 +100,11 @@ describe('Others', () => {
   })
 
   describe('canSkip', () => {
-    // strictMode, postpone, passedPercent, postponePercent
-    it('is false when in strict mode I', () => {
-      canSkip(true, true, 20, 30).should.equal(false)
+    it('is false when in strict mode', () => {
+      canSkip(true).should.equal(false)
     })
-    it('is false when in strict mode II', () => {
-      canSkip(true, true, 40, 30).should.equal(false)
-    })
-    it('is false when in strict mode III', () => {
-      canSkip(true, false, 20, 30).should.equal(false)
-    })
-    it('is false when in strict mode IV', () => {
-      canSkip(true, false, 40, 30).should.equal(false)
-    })
-    it('is true when not in strict mode and after postpone percent', () => {
-      canSkip(false, true, 40, 30).should.equal(true)
-    })
-    it('is false when not in strict mode and before postpone percent', () => {
-      canSkip(false, true, 20, 30).should.equal(false)
-    })
-    it('is true when not in strict mode I', () => {
-      canSkip(false, false, 40, 30).should.equal(true)
-    })
-    it('is true when not in strict mode II', () => {
-      canSkip(false, false, 20, 30).should.equal(true)
+    it('is true when not in strict mode', () => {
+      canSkip(false).should.equal(true)
     })
   })
 

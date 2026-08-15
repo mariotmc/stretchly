@@ -91,7 +91,7 @@ window.onload = async (event) => {
         } else {
           postponeElement.classList.add('hidden')
         }
-        if (window.utils.canSkip(strictMode, postpone, passedPercent, postponePercent)) {
+        if (window.utils.canSkip(strictMode)) {
           closeElement.classList.remove('hidden')
         } else {
           closeElement.classList.add('hidden')

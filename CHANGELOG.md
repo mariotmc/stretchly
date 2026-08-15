@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - breaks can now be postponed without a per-break limit
+- breaks can be skipped from the moment they start, alongside postponing, unless Strict mode is on
 
 ### Fixed
 - tray icon system theme now follows the Windows mode used by the taskbar instead of the default app mode
